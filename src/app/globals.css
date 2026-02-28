@@ -5,6 +5,17 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Grey primitives — raw palette for utilities (bg-gray-100, text-gray-500, etc.) */
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  /* Brand green primitives */
+  --color-green-100: var(--green-100);
+  --color-green-500: var(--green-500);
+  --color-green-700: var(--green-700);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -60,72 +71,85 @@
    ========================================================================== */
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #252525;
-  --card: #ffffff;
-  --card-foreground: #252525;
-  --popover: #ffffff;
-  --popover-foreground: #252525;
-  --primary: #343434;
-  --primary-foreground: #fafafa;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #343434;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #f5f5f5;
-  --accent-foreground: #343434;
+  /* Grey primitives */
+  --gray-100: #ffffff;
+  --gray-200: #ecede8;
+  --gray-300: #d7d8d2;
+  --gray-400: #5a5e58;
+  --gray-500: #2f322d;
+  --gray-600: #0b0c0a;
+  /* Brand green primitives */
+  --green-100: #d6f9ce;
+  --green-500: #9ee770;
+  --green-700: #163300;
+  /* Semantic mapping (light) */
+  --background: var(--gray-100);
+  --foreground: var(--gray-600);
+  --card: var(--gray-200);
+  --card-foreground: var(--gray-600);
+  --popover: var(--gray-100);
+  --popover-foreground: var(--gray-600);
+  --primary: var(--green-500);
+  --primary-foreground: var(--green-700);
+  --secondary: var(--green-100);
+  --secondary-foreground: var(--green-700);
+  --muted: var(--gray-200);
+  --muted-foreground: var(--gray-400);
+  --accent: var(--gray-200);
+  --accent-foreground: var(--gray-600);
   --destructive: #dc2626;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #a3a3a3;
+  --border: var(--gray-200);
+  --input: var(--gray-300);
+  --ring: var(--gray-400);
   --chart-1: #e07c2e;
   --chart-2: #2a9d8f;
   --chart-3: #3d5a80;
   --chart-4: #e9c46a;
   --chart-5: #e76f51;
-  --sidebar: #fafafa;
-  --sidebar-foreground: #252525;
-  --sidebar-primary: #343434;
-  --sidebar-primary-foreground: #fafafa;
-  --sidebar-accent: #f5f5f5;
-  --sidebar-accent-foreground: #343434;
-  --sidebar-border: #e5e5e5;
-  --sidebar-ring: #a3a3a3;
+  --sidebar: var(--gray-100);
+  --sidebar-foreground: var(--gray-600);
+  --sidebar-primary: var(--gray-500);
+  --sidebar-primary-foreground: var(--gray-100);
+  --sidebar-accent: var(--gray-200);
+  --sidebar-accent-foreground: var(--gray-600);
+  --sidebar-border: var(--gray-200);
+  --sidebar-ring: var(--gray-400);
 }
 
 /* DESIGNER: Dark mode — add class "dark" to <html> to enable; these vars override :root in dark mode */
-.dark {
-  --background: #252525;
-  --foreground: #fafafa;
-  --card: #343434;
-  --card-foreground: #fafafa;
-  --popover: #343434;
-  --popover-foreground: #fafafa;
-  --primary: #ebebeb;
-  --primary-foreground: #252525;
-  --secondary: #454545;
-  --secondary-foreground: #fafafa;
-  --muted: #454545;
-  --muted-foreground: #a3a3a3;
-  --accent: #454545;
-  --accent-foreground: #fafafa;
+.dark, :root.dark {
+  /* Grey primitives stay the same; semantic mapping flips for dark */
+  --background: var(--gray-600);
+  --foreground: var(--gray-100);
+  --card: var(--gray-500);
+  --card-foreground: var(--gray-100);
+  --popover: var(--gray-500);
+  --popover-foreground: var(--gray-100);
+  --primary: var(--green-500);
+  --primary-foreground: var(--green-700);
+  --secondary: var(--green-700);
+  --secondary-foreground: var(--green-500);
+  --muted: var(--gray-500);
+  --muted-foreground: var(--gray-300);
+  --accent: var(--gray-500);
+  --accent-foreground: var(--gray-100);
   --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: #737373;
+  --border: var(--gray-400);
+  --input: var(--gray-400);
+  --ring: var(--gray-400);
   --chart-1: #6366f1;
   --chart-2: #2dd4bf;
   --chart-3: #e9c46a;
   --chart-4: #a78bfa;
   --chart-5: #f87171;
-  --sidebar: #252525;
-  --sidebar-foreground: #fafafa;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #fafafa;
-  --sidebar-accent: #454545;
-  --sidebar-accent-foreground: #fafafa;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #737373;
+  --sidebar: var(--gray-600);
+  --sidebar-foreground: var(--gray-100);
+  --sidebar-primary: var(--gray-200);
+  --sidebar-primary-foreground: var(--gray-600);
+  --sidebar-accent: var(--gray-500);
+  --sidebar-accent-foreground: var(--gray-100);
+  --sidebar-border: var(--gray-400);
+  --sidebar-ring: var(--gray-400);
 }
 
 @layer base {

@@ -12,7 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ArrowUpCircle, PlusCircle, ChevronDown } from "lucide-react"
+import Image from "next/image"
+import { ArrowUp, Plus, Landmark } from "lucide-react"
+import europeFlag from "@/assets/europe.jpg"
+import australiaFlag from "@/assets/australia.jpg"
+import canadaFlag from "@/assets/canada.jpg"
+import unitedKingdomFlag from "@/assets/united-kingdom.jpg"
+import { PageTransition } from "@/components/page-transition"
+import { FadeIn } from "@/components/fade-in"
 
 /**
  * DESIGNER NOTE: Wise-style dashboard — layout and structure only.
@@ -26,101 +33,93 @@ import { ArrowUpCircle, PlusCircle, ChevronDown } from "lucide-react"
  */
 
 const CURRENCY_ACCOUNTS = [
-  { code: "EUR", label: "EUR", accountId: "51568", balance: "1.00", flag: "🇪🇺" },
-  { code: "AUD", label: "AUD", accountId: "30779", balance: "0.00", flag: "🇦🇺" },
-  { code: "CAD", label: "CAD", accountId: "15376", balance: "0.00", flag: "🇨🇦" },
-  { code: "GBP", label: "GBP", accountId: "13159", balance: "0.00", flag: "🇬🇧" },
+  { code: "AUD", label: "AUD", accountId: "4 7823", balance: "3,842.50", flag: australiaFlag },
+  { code: "EUR", label: "EUR", accountId: "6 1904", balance: "1,215.30", flag: europeFlag },
+  { code: "GBP", label: "GBP", accountId: "8 3361", balance: "478.90", flag: unitedKingdomFlag },
+  { code: "CAD", label: "CAD", accountId: "2 5517", balance: "156.20", flag: canadaFlag },
 ]
 
 const RECENT_TRANSACTIONS = [
-  { id: "1", icon: ArrowUpCircle, name: "Hannah Johnson", subtitle: "Sent - 18 Apr", amount: "49 EUR", isCredit: false },
-  { id: "2", icon: PlusCircle, name: "To EUR", subtitle: "Added - 18 Apr", amount: "+ 50 EUR", subAmount: "50.44 EUR", isCredit: true },
-  { id: "3", icon: ArrowUpCircle, name: "Brandon Bolt", subtitle: "Sent - 2 Apr", amount: "110 EUR", isCredit: false },
+  { id: "1", icon: ArrowUp, name: "Sarah Mitchell", subtitle: "Sent · 26 Feb", amount: "750 AUD", isCredit: false },
+  { id: "2", icon: Plus, name: "To AUD", subtitle: "Added · 24 Feb", amount: "+ 2,000 AUD", subAmount: "2,014.80 AUD", isCredit: true },
+  { id: "3", icon: ArrowUp, name: "James Cooper", subtitle: "Sent · 19 Feb", amount: "320 EUR", isCredit: false },
+  { id: "4", icon: Plus, name: "To GBP", subtitle: "Added · 15 Feb", amount: "+ 500 GBP", subAmount: "503.25 GBP", isCredit: true },
+  { id: "5", icon: ArrowUp, name: "Liam Nguyen", subtitle: "Sent · 10 Feb", amount: "1,100 AUD", isCredit: false },
 ]
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col gap-8 p-6">
+    <PageTransition className="mx-auto flex w-full max-w-[976px] flex-1 flex-col gap-8 px-6 pb-6 pt-14">
       {/* Total balance + actions */}
-      <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Total balance</h2>
-        <p className="text-3xl font-bold tracking-tight">1.00 EUR</p>
+      <FadeIn as="section" delay={0} className="space-y-4">
+        <div className="space-y-0">
+          <p className="text-sm font-medium text-muted-foreground">Total balance</p>
+          <h2 className="text-3xl font-bold tracking-tight">5,692.90 USD</h2>
+        </div>
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button size="sm" className="rounded-full bg-primary text-primary-foreground transition-colors hover:bg-[#88d35e]">
             Send
           </Button>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button size="sm" variant="secondary">
             Add money
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="gap-1">
-                Request
-                <ChevronDown className="size-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuItem>Request from bank account</DropdownMenuItem>
-              <DropdownMenuItem>Request from card</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button size="sm" variant="secondary">
+            Request
+          </Button>
         </div>
-      </section>
+      </FadeIn>
 
       {/* Currency account cards */}
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <FadeIn as="section" delay={0.1} className="flex gap-3 overflow-x-auto">
         {CURRENCY_ACCOUNTS.map((account) => (
-          <Card key={account.code} className="bg-muted/50">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <span className="text-lg" aria-hidden>{account.flag}</span>
+          <Card key={account.code} className="flex h-[206px] w-[256px] shrink-0 cursor-pointer flex-col justify-between rounded-2xl border-0 bg-card transition-colors hover:brightness-95 dark:hover:brightness-125">
+            <CardHeader className="flex flex-row items-center justify-start space-y-0 pb-2">
+              <Image src={account.flag} alt={`${account.label} flag`} width={48} height={48} className="size-12 rounded-full object-cover" />
               <CardTitle className="text-base font-medium">{account.label}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-1">
-              <p className="text-xs text-muted-foreground">Account - {account.accountId}</p>
+            <CardContent className="mt-auto space-y-1">
+              <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Landmark className="size-3" />
+                <span>·· {account.accountId}</span>
+              </p>
               <p className="text-2xl font-bold">{account.balance}</p>
             </CardContent>
           </Card>
         ))}
-      </section>
+      </FadeIn>
 
       {/* Recent transactions */}
-      <section className="space-y-4">
+      <FadeIn as="section" delay={0.2} className="mt-6 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Transactions</h2>
           <Link
-            href="/"
-            className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+            href="/transactions"
+            className="text-sm font-medium text-foreground underline underline-offset-4"
           >
             See all
           </Link>
         </div>
-        <ul className="divide-y divide-border rounded-lg border bg-card">
+        <ul className="flex flex-col gap-0.5">
           {RECENT_TRANSACTIONS.map((tx) => (
-            <li key={tx.id} className="flex items-center gap-4 px-4 py-3">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted">
+            <li key={tx.id} className="flex items-center gap-4 rounded-lg py-4">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-border bg-muted">
                 <tx.icon className="size-5 text-muted-foreground" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="font-medium">{tx.name}</p>
                 <p className="text-sm text-muted-foreground">{tx.subtitle}</p>
+              </div>
+              <div className="ml-auto shrink-0 text-right">
+                <p className="font-medium">{tx.amount}</p>
                 {tx.subAmount && (
-                  <p className="text-xs text-muted-foreground">{tx.subAmount}</p>
+                  <p className="text-sm text-muted-foreground">{tx.subAmount}</p>
                 )}
               </div>
-              <p className={`shrink-0 text-right font-medium ${tx.isCredit ? "text-primary" : ""}`}>
-                {tx.amount}
-              </p>
             </li>
           ))}
         </ul>
-      </section>
+      </FadeIn>
 
-      {/* Footer */}
-      <footer className="mt-auto pt-4">
-        <p className="text-xs text-muted-foreground">
-          Provided by Wise Assets Europe
-        </p>
-      </footer>
-    </div>
+    </PageTransition>
   )
 }
